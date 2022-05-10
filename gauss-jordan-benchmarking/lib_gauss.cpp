@@ -3,6 +3,8 @@
  *
  *  Created on: May 7, 2022
  *      Author: d-w-h
+ *
+ *  No copyright here :)
  */
 
 #include <math.h>
