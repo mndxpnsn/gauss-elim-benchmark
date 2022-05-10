@@ -48,7 +48,7 @@ int main(int argc, char * argv[]) {
     // Compute inverse using custom Gauss-Jordan method
     gauss_jordan(mat, n, mat_inv);
 
-    // Get ending custom Gauss-Jordan method
+    // Get stop time custom Gauss-Jordan method
     auto stop = high_resolution_clock::now();
 
     // Get duration custom Gauss-Jordan method
@@ -57,13 +57,13 @@ int main(int argc, char * argv[]) {
     // Print duration custom Gauss-Jordan method
     cout << "duration custom Guass-Jordan: " << duration.count() << "(s)" << endl;
 
-    // Get starting reference method 1
+    // Time reference method 1
     start = high_resolution_clock::now();
 
     // Compute inverse using reference method 1
     auto inv = inverse(mat1);
 
-    // Get ending reference method 1
+    // Get stop time reference method 1
     stop = high_resolution_clock::now();
 
     // Get duration reference method 1
@@ -72,13 +72,13 @@ int main(int argc, char * argv[]) {
     // Print duration reference method 1
     cout << "duration reference method 1: " << duration.count() << "(s)" << endl;
 
-    // Start timing reference method 2
+    // Time reference method 2
     start = high_resolution_clock::now();
 
     // Compute inverse using reference method 2
     mat2 = inv_ref(mat2, true);
 
-    // Get ending reference method 2
+    // Get stop time reference method 2
     stop = high_resolution_clock::now();
 
     // Get duration reference method 2
