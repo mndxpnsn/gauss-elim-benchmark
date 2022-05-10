@@ -55,7 +55,7 @@ int main(int argc, char * argv[]) {
     auto duration = duration_cast<seconds>(stop - start);
 
     // Print duration custom Gauss-Jordan method
-    cout << "duration custom Guass-Jordan: " << duration.count() << "(s)" << endl;
+    cout << "duration custom Guass-Jordan: " << duration.count() << " (s)" << endl;
 
     // Time reference method 1
     start = high_resolution_clock::now();
@@ -70,7 +70,7 @@ int main(int argc, char * argv[]) {
     duration = duration_cast<seconds>(stop - start);
 
     // Print duration reference method 1
-    cout << "duration reference method 1: " << duration.count() << "(s)" << endl;
+    cout << "duration reference method 1: " << duration.count() << " (s)" << endl;
 
     // Time reference method 2
     start = high_resolution_clock::now();
@@ -85,7 +85,7 @@ int main(int argc, char * argv[]) {
     duration = duration_cast<seconds>(stop - start);
 
     // Print duration of reference method 2
-    cout << "duration reference method 2: " << duration.count() << "(s)" << endl;
+    cout << "duration reference method 2: " << duration.count() << " (s)" << endl;
 
     // Verify computation custom Gauss-Jordan method
     mat_mult_sq(mat_store, mat_inv, n, mat_prod);
