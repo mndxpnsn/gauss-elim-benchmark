@@ -20,7 +20,7 @@ using namespace std::chrono;
 int main(int argc, char * argv[]) {
 
     // Size input matrix
-    int n = 2000;
+    int n = 1000;
 
     // Allocate space for matrices
     double ** mat = mat2D(n);
@@ -33,10 +33,10 @@ int main(int argc, char * argv[]) {
     // Populate matrix mat with some data
     init_mat(n, mat);
 
-    // Initialize reference matrix m with mat data
+    // Populate reference matrix mat1 with mat data
     set_mat_to_matrix(mat, n, mat1);
     
-    // Populate reference matrix mat_ref with mat data
+    // Populate reference matrix mat2 with mat data
     init_vec2D(mat, n, mat2);
 
     // Store initial matrix mat
