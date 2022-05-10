@@ -20,25 +20,24 @@ using namespace std::chrono;
 int main(int argc, char * argv[]) {
 
     // Size input matrix
-    int n = 1000;
+    int n = 2000;
 
     // Allocate space for matrices
     double ** mat = mat2D(n);
     double ** mat_inv = mat2D(n);
-    double ** mat_inv_ref = mat2D(n);
     double ** mat_prod = mat2D(n);
     double ** mat_store = mat2D(n);
-    matrix m(n, n);
-    i_real_matrix matrix_ref;
+    matrix mat1(n, n);
+    i_real_matrix mat2;
 
     // Populate matrix mat with some data
     init_mat(n, mat);
 
-    // Populate reference matrix mat_ref with mat data
-    init_vec2D(mat, n, matrix_ref);
-
     // Initialize reference matrix m with mat data
-    set_mat_to_matrix(mat, n, m);
+    set_mat_to_matrix(mat, n, mat1);
+    
+    // Populate reference matrix mat_ref with mat data
+    init_vec2D(mat, n, mat2);
 
     // Store initial matrix mat
     set_mat(mat, n, mat_store);
@@ -62,7 +61,7 @@ int main(int argc, char * argv[]) {
     start = high_resolution_clock::now();
 
     // Compute inverse using reference method 1
-    auto inv = inverse(m);
+    auto inv = inverse(mat1);
 
     // Get ending reference method 1
     stop = high_resolution_clock::now();
@@ -77,7 +76,7 @@ int main(int argc, char * argv[]) {
     start = high_resolution_clock::now();
 
     // Compute inverse using reference method 2
-    matrix_ref = inv_ref(matrix_ref, true);
+    mat2 = inv_ref(mat2, true);
 
     // Get ending reference method 2
     stop = high_resolution_clock::now();
@@ -94,7 +93,6 @@ int main(int argc, char * argv[]) {
     // Free allocated space
     free_mat2D(mat, n);
     free_mat2D(mat_inv, n);
-    free_mat2D(mat_inv_ref, n);
     free_mat2D(mat_prod, n);
     free_mat2D(mat_store, n);
 
