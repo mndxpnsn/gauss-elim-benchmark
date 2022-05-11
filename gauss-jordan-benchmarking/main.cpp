@@ -13,6 +13,7 @@
 #include "lib_testing.hpp"
 #include "lib_testing_ref.hpp"
 #include "user_types.hpp"
+#include "Eigen/LU"
 
 using namespace std;
 using namespace std::chrono;
@@ -20,7 +21,7 @@ using namespace std::chrono;
 int main(int argc, char * argv[]) {
 
     // Size input matrix
-    int n = 1000;
+    int n = 5;
 
     // Allocate space for matrices
     double ** mat = mat2D(n);
@@ -29,6 +30,7 @@ int main(int argc, char * argv[]) {
     double ** mat_store = mat2D(n);
     matrix mat1(n, n);
     i_real_matrix mat2;
+    MatrixXd mat3(n, n);
 
     // Populate matrix mat with some data
     init_mat(n, mat);
@@ -38,6 +40,9 @@ int main(int argc, char * argv[]) {
     
     // Populate reference matrix mat2 with mat data
     init_vec2D(mat, n, mat2);
+    
+    // Populate reference matrix mat3 with mat data
+    set_mat_to_matxd(mat, n, mat3);
 
     // Store initial matrix mat
     set_mat(mat, n, mat_store);
@@ -61,7 +66,7 @@ int main(int argc, char * argv[]) {
     start = high_resolution_clock::now();
 
     // Compute inverse using reference method 1
-    auto inv = inverse(mat1);
+    auto mat1_inv = inverse(mat1);
 
     // Get stop time reference method 1
     stop = high_resolution_clock::now();
@@ -76,7 +81,7 @@ int main(int argc, char * argv[]) {
     start = high_resolution_clock::now();
 
     // Compute inverse using reference method 2
-    mat2 = inv_ref(mat2, true);
+    i_real_matrix mat2_inv = inv_ref(mat2, true);
 
     // Get stop time reference method 2
     stop = high_resolution_clock::now();
@@ -86,10 +91,33 @@ int main(int argc, char * argv[]) {
 
     // Print duration of reference method 2
     cout << "duration reference method 2: " << duration.count() << " (s)" << endl;
+    
+    // Time reference method 3, Eigen lib
+    start = high_resolution_clock::now();
+    
+    // Compute inverse using reference method 3, Eigen lib
+    MatrixXd mat3_inv = mat3.inverse();
 
-    // Verify computation custom Gauss-Jordan method
-    mat_mult_sq(mat_store, mat_inv, n, mat_prod);
+    // Get stop time reference method 3, Eigen lib
+    stop = high_resolution_clock::now();
 
+    // Get duration reference method 3, Eigen lib
+    duration = duration_cast<seconds>(stop - start);
+
+    // Print duration of reference method 3, Eigen lib
+    cout << "duration reference method 3: " << duration.count() << " (s)" << endl;
+    
+    // Print the computed inverse
+    cout << endl << "Printing the determined inverse" << endl;
+
+    print_mat(mat_inv, n);
+
+    print(std::cout, mat1_inv);
+
+    showMatrix(mat2_inv, "reference solution", false);
+
+    print_matxd(mat3_inv, n);
+    
     // Free allocated space
     free_mat2D(mat, n);
     free_mat2D(mat_inv, n);
