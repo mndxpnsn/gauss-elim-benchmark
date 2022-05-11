@@ -10,13 +10,8 @@
 
 #include <vector>
 
-#include "Eigen/LU"
-
 const int MAX_INT = 1215752192;
 const double SMALL_NUM = 1e-10;
-
-using Eigen::Inverse;
-using Eigen::MatrixXd;
 
 typedef struct order_array_elem {
     int old_row;

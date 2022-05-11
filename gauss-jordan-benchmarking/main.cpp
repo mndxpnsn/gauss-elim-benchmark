@@ -13,7 +13,6 @@
 #include "lib_testing.hpp"
 #include "lib_testing_ref.hpp"
 #include "user_types.hpp"
-#include "Eigen/LU"
 
 using namespace std;
 using namespace std::chrono;
@@ -30,7 +29,6 @@ int main(int argc, char * argv[]) {
     double ** mat_store = mat2D(n);
     matrix mat1(n, n);
     i_real_matrix mat2;
-    MatrixXd mat3(n, n);
 
     // Populate matrix mat with some data
     init_mat(n, mat);
@@ -40,9 +38,6 @@ int main(int argc, char * argv[]) {
     
     // Populate reference matrix mat2 with mat data
     init_vec2D(mat, n, mat2);
-    
-    // Populate reference matrix mat3 with mat data
-    set_mat_to_matxd(mat, n, mat3);
 
     // Store initial matrix mat
     set_mat(mat, n, mat_store);
@@ -92,21 +87,6 @@ int main(int argc, char * argv[]) {
     // Print duration of reference method 2
     cout << "duration reference method 2: " << duration.count() << " (s)" << endl;
     
-    // Time reference method 3, Eigen lib
-    start = high_resolution_clock::now();
-    
-    // Compute inverse using reference method 3, Eigen lib
-    MatrixXd mat3_inv = mat3.inverse();
-
-    // Get stop time reference method 3, Eigen lib
-    stop = high_resolution_clock::now();
-
-    // Get duration reference method 3, Eigen lib
-    duration = duration_cast<seconds>(stop - start);
-
-    // Print duration of reference method 3, Eigen lib
-    cout << "duration reference method 3: " << duration.count() << " (s)" << endl;
-    
     // Print the computed inverse
     cout << endl << "Printing the determined inverse" << endl;
 
@@ -116,8 +96,6 @@ int main(int argc, char * argv[]) {
 
     showMatrix(mat2_inv, "reference solution", false);
 
-    print_matxd(mat3_inv, n);
-    
     // Free allocated space
     free_mat2D(mat, n);
     free_mat2D(mat_inv, n);
