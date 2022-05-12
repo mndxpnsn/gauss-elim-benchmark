@@ -57,14 +57,6 @@ void set_mat_to_matrix(double ** mat, int n, matrix & m) {
     }
 }
 
-void set_mat_to_matxd(double ** mat, int n, MatrixXd & mat_out) {
-    for(int i = 0; i < n; ++i) {
-        for(int j = 0; j < n; ++j) {
-            mat_out(i, j) = mat[i][j];
-        }
-    }
-}
-
 void set_mat(double ** mat, int n, double ** mat_store) {
     for(int i = 0; i < n; ++i) {
         for(int j = 0; j < n; ++j) {
@@ -78,16 +70,6 @@ void print_mat(double ** mat, int n) {
     for(int i = 0; i < n; ++i) {
         for(int j = 0; j < n; ++j) {
             printf("%.5f ", mat[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
-}
-
-void print_matxd(MatrixXd mat, int n) {
-    for(int i = 0; i < n; ++i) {
-        for(int j = 0; j < n; ++j) {
-            printf("%.5f ", mat(i, j));
         }
         printf("\n");
     }
